@@ -1,0 +1,10 @@
+FOREIGN_KEY_CHECKS est une variable de système qui est utilisé pour contrôler
+si les contraintes de clé étrangère sont appliquées ou non. Donc comme on peut
+le voir à la ligne 12, FOREIGN_KEY_CHECKS = 0, ce qui veut dire que les
+contraintes de clé étrangère sont temporairement désactivées. Cela aide avec la
+désactivation de la vérification de ceux-ci. Cela peut aussi accélérer certaines
+opérations en blocs. Pour la ligne 440 de son côté, on va réactiver la valeur de
+FOREIGN_KEY_CHECKS à sa valeur par défaut de 1, donc FOREIGN_KEY_CHECKS = 1. Ce
+que ceci va faire est qu’il va réactiver les contraintes de clé étrangère, ce qui
+garantit que les références à des lignes inexistantes dans d’autres tables ne sont
+pas autorisées.

@@ -81,20 +81,20 @@ SET @bonkoga_product_id = (SELECT `id` FROM `products` WHERE `name` = 'Bon Koga'
 -- Insertion des commandes pour Fati Amadou
 INSERT INTO `orders` (`customer_id`, `order_date`, `total_amount`, `status`, `user_id`, `cart_id`)
 VALUES
-(),
-(),
-(),
+(@fati_user_id, NOW(), 175.48, 0, @admin_user_id, 2),
+(@fati_user_id, NOW(), 60.95, 0, @admin_user_id, 2),
+(@fati_user_id, NOW(), 38.5, 0, @admin_user_id, 2),
 
 -- pour Alain Foka
-(),
-(),
-(),
-(),
+(@alain_user_id, NOW(), 55, 0, @admin_user_id, 3),
+(@alain_user_id, NOW(), 30, 0, @admin_user_id, 3),
+(@alain_user_id, NOW(), 93.6, 0, @admin_user_id, 3),
+(@alain_user_id, NOW(), 38.5, 0, @admin_user_id, 3),
 
 -- pour Fati Amadou encore
-(),
-(),
-();
+(@fati_user_id, NOW(), 25, 0, @admin_user_id, 2),
+(@fati_user_id, NOW(), 70.2, 0, @admin_user_id, 2),
+(@fati_user_id, NOW(), 55, 0, @admin_user_id, 2);
 
 -- Insertion des utilisateurs a l'interieure de carts
 INSERT INTO `carts` (`user_id`, `actif`)
@@ -106,30 +106,32 @@ VALUES
 -- Insertion des produits dans cart_product
 INSERT INTO `cart_product` (`cart_id`, `product_id`, `quantity`, `total`, `tax`, `quantity_remainder`)
 VALUES
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-();
+(2, (SELECT `id` FROM `products` WHERE `name` = 'Advile'), 4, 175.48, 10, 0),
+(2, (SELECT `id` FROM `products` WHERE `name` = 'Paracetamol2'), 5, 60.95, 10, 0),
+(2, (SELECT `id` FROM `products` WHERE `name` = 'Gravol'), 7, 38.5, 10, 0),
+(3, (SELECT `id` FROM `products` WHERE `name` = 'Ibuprofen'), 5, 55, 10, 0),
+(3, (SELECT `id` FROM `products` WHERE `name` = 'Ducolax'), 3, 30, 10, 0),
+(3, (SELECT `id` FROM `products` WHERE `name` = 'Tilenol'), 4, 93.6, 10, 0),
+(3, (SELECT `id` FROM `products` WHERE `name` = 'Gravol'), 7, 38.5, 10, 0),
+(4, (SELECT `id` FROM `products` WHERE `name` = 'Multi-Vitamine'), 1, 25, 10, 0),
+(4, (SELECT `id` FROM `products` WHERE `name` = 'Bon Koga'), 2, 70.2, 10, 0),
+(4, (SELECT `id` FROM `products` WHERE `name` = 'Gravol'), 10, 55, 10, 0);
 
 -- Insertion des donnes dans la table invoices
 INSERT INTO `invoices` (`montant`, `tax`, `users_id`)
 VALUES
-(),
-(),
-();
+((SELECT SUM(`total`) FROM `cart_product` WHERE `cart_id` = 2), (SELECT SUM(`total`) * 0.1 FROM `cart_product` WHERE `cart_id` = 2), @fati_user_id),
+((SELECT SUM(`total`) FROM `cart_product` WHERE `cart_id` = 3), (SELECT SUM(`total`) * 0.1 FROM `cart_product` WHERE `cart_id` = 3), @alain_user_id),
+((SELECT SUM(`total`) FROM `cart_product` WHERE `cart_id` = 4), (SELECT SUM(`total`) * 0.1 FROM `cart_product` WHERE `cart_id` = 4), @fati_user_id);
 
 -- Insertion des invoices dans invoice_elements
 INSERT INTO `invoice_elements` (`invoice_id`)
 VALUES
-(),
-(),
-();
+(1),
+(2),
+(3);
+
+COMMIT;
 
 -- Modification des donnes
 update users set designation = "comptable", adress = "415 Av. de l'Universite", province = "NB",

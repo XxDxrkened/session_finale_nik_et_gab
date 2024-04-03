@@ -57,5 +57,13 @@ grant insert on epharmacy.products to 'pharma'@'localhost';
 grant insert on epharmacy.invoices to 'pharma'@'localhost';
 grant insert on epharmacy.invoice_elements to 'pharma'@'localhost';
 
+-- Pour voir si question 12 fonctionne tu px lenlever once ta figurer out everything
+select * from carts;
+select * from products;
+select * from cart_product;
+select * from orders;
+select * from invoices;
+select * from invoice_elements;
+
  -- Modification des donnees 
 grant update on epharmacy.users to 'pharma'@'localhost';

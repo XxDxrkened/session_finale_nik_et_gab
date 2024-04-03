@@ -33,3 +33,6 @@ alter table users add gender enum("male", "female", "other");
 
 -- Question 10
 call spProfileImage();
+
+-- Question 11
+alter table users add constraint uc_email unique (email);

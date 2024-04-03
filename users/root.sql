@@ -48,3 +48,14 @@ begin
 end $
 delimiter ;
 grant execute on procedure epharmacy.spProfileImage to 'pharma'@'localhost';
+
+-- Droits Question 12
+grant insert on epharmacy.carts to 'pharma'@'localhost';
+grant insert on epharmacy.cart_product to 'pharma'@'localhost';
+grant insert on epharmacy.orders to 'pharma'@'localhost';
+grant insert on epharmacy.products to 'pharma'@'localhost';
+grant insert on epharmacy.invoices to 'pharma'@'localhost';
+grant insert on epharmacy.invoice_elements to 'pharma'@'localhost';
+
+ -- Modification des donnees 
+grant update on epharmacy.users to 'pharma'@'localhost';
